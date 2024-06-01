@@ -17,12 +17,22 @@
     <thead>
       <tr>
         <th>No</th>
-        <th>Username</th>
-        <th>Full Name</th>
+        <th>
+          Username
+        </th>
+        <th>
+          Full Name
+          <button (click)="setSortColumn('firstName')">Sort</button>
+        </th>
         <th>Email</th>
-        <th>Status</th>
-        <th>Group</th>
-        <th>Action</th>
+        <th>
+          Status
+          <button (click)="setSortColumn('status')">Sort</button>
+        </th>
+        <th>
+          Group
+          <button (click)="setSortColumn('group')">Sort</button>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -33,9 +43,6 @@
         <td>{{ employee.email }}</td>
         <td>{{ employee.status }}</td>
         <td>{{ employee.group }}</td>
-        <td>
-          
-        </td>
       </tr>
     </tbody>
   </table>

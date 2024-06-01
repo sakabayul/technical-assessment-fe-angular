@@ -234,6 +234,8 @@ export class DashboardComponent {
   currentPage: number = 1; // Halaman saat ini default
   pageSize: number = 5; // Jumlah item per halaman default
   totalPages: number = 0;
+  sortOrder: 'asc' | 'desc' = 'asc'; // State untuk urutan sorting
+  sortColumn: string = ''; // Default sorting berdasarkan data pertama ke terakhir
 
   constructor(private authService: AuthService) { }
 
@@ -243,6 +245,7 @@ export class DashboardComponent {
 
   // Fungsi untuk menetapkan data karyawan pada halaman yang dipilih
   getPagedEmployees(): Employee[] {
+    this.sortEmployees(); // Terapkan sorting sebelum mem-paginasi
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = Math.min(startIndex + this.pageSize, this.employees.length);
     return this.employees.slice(startIndex, endIndex);
@@ -272,8 +275,40 @@ export class DashboardComponent {
 
   onChangePageSize(value: string): void {
     this.pageSize = +value;
-    this.updatePaging();
     this.currentPage = 1; // Kembali ke halaman pertama setiap kali mengubah jumlah item per halaman
+    this.updatePaging();
+  }
+
+  sortEmployees(): void {
+    this.employees.sort((a, b) => {
+      let aValue = (a as any)[this.sortColumn];
+      let bValue = (b as any)[this.sortColumn];
+
+      if (typeof aValue === 'string') {
+        aValue = aValue.toLowerCase();
+      }
+      if (typeof bValue === 'string') {
+        bValue = bValue.toLowerCase();
+      }
+
+      if (aValue < bValue) {
+        return this.sortOrder === 'asc' ? -1 : 1;
+      } else if (aValue > bValue) {
+        return this.sortOrder === 'asc' ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
+  setSortColumn(column: string): void {
+    if (this.sortColumn === column) {
+      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = column;
+      this.sortOrder = 'asc';
+    }
+    this.currentPage = 1; // Reset to first page after sorting
   }
 
   // Fungsi untuk logout
