@@ -1,2 +1,28 @@
-<h2>Welcome to the Dashboard</h2>
-<p>You are logged in!</p>
+<div>
+  <h2>Welcome to the Dashboard</h2>
+  <button (click)="logout()">Logout</button>
+
+  <h3>Employee List</h3>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Username</th>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees; let i = index">
+        <td>{{ i+1 }}</td>
+        <td>{{ employee.username }}</td>
+        <td>{{ employee.firstName }} {{ employee.lastName }}</td>
+        <td>{{ employee.email }}</td>
+        <td>{{ employee.status }}</td>
+        <td>{{ employee.group }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
