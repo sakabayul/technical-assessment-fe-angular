@@ -3,6 +3,16 @@
   <button (click)="logout()">Logout</button>
 
   <h3>Employee List</h3>
+
+  <div>
+    <label for="pageSize">Items per page:</label>
+    <select id="pageSize" [(ngModel)]="pageSize" (ngModelChange)="onChangePageSize($event)">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="20">20</option>
+    </select>
+  </div>
+
   <table border="1">
     <thead>
       <tr>
@@ -12,17 +22,27 @@
         <th>Email</th>
         <th>Status</th>
         <th>Group</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let employee of employees; let i = index">
-        <td>{{ i+1 }}</td>
+      <tr *ngFor="let employee of getPagedEmployees(); let i = index">
+        <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
         <td>{{ employee.username }}</td>
         <td>{{ employee.firstName }} {{ employee.lastName }}</td>
         <td>{{ employee.email }}</td>
         <td>{{ employee.status }}</td>
         <td>{{ employee.group }}</td>
+        <td>
+          
+        </td>
       </tr>
     </tbody>
   </table>
+
+  <div>
+    <button [disabled]="currentPage === 1" (click)="prevPage()">Previous</button>
+    Page {{ currentPage }} of {{ totalPages }}
+    <button [disabled]="currentPage === totalPages" (click)="nextPage()">Next</button>
+  </div>
 </div>
