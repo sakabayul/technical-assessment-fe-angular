@@ -2,6 +2,31 @@
   <h2>Welcome to the Dashboard</h2>
   <button (click)="logout()">Logout</button>
 
+  <h3>Search Employees</h3>
+  <div>
+    <!-- Input pencarian -->
+    <label for="searchUsername">Search by Username:</label>
+    <input type="text" id="searchUsername" [(ngModel)]="searchUsername">
+    
+    <label for="searchGroup">Search by Group:</label>
+    <select id="searchGroup" [(ngModel)]="searchGroup">
+      <option value="">All</option>
+      <option *ngFor="let group of getDistinctGroups()" [value]="group">{{ group }}</option>
+    </select>
+    
+    <label for="searchStatus">Search by Status:</label>
+    <select id="searchStatus" [(ngModel)]="searchStatus">
+      <option value="">All</option>
+      <option *ngFor="let status of getDistinctStatuses()" [value]="status">{{ status }}</option>
+    </select>
+  
+    <!-- Tombol pencarian -->
+    <button (click)="search()">Search</button>
+    <!-- Tombol untuk membersihkan input pencarian -->
+    <button (click)="clearFilter()">Clear</button>
+  </div>
+
+
   <h3>Employee List</h3>
 
   <div>

@@ -8,6 +8,7 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  // Data karyawan
   employees: Employee[] = [
     {
       username: 'john_doe',
@@ -230,16 +231,28 @@ export class DashboardComponent {
       description: 'Quis nostrud exercitation ullamco'
     }
   ];
+  // Buat variabel baru untuk menyimpan salinan data karyawan untuk pencarian
+  filteredEmployees: Employee[] = [];
 
+  // Properti untuk paging
   currentPage: number = 1; // Halaman saat ini default
   pageSize: number = 5; // Jumlah item per halaman default
   totalPages: number = 0;
+
+  // Properti untuk sorting
   sortOrder: 'asc' | 'desc' = 'asc'; // State untuk urutan sorting
   sortColumn: string = ''; // Default sorting berdasarkan data pertama ke terakhir
+
+  // Properti untuk pencarian
+  searchUsername: string = ''; // Input search berdasarkan username
+  searchGroup: string = ''; // Input search berdasarkan group
+  searchStatus: string = ''; // Input search berdasarkan status
 
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    // Salin data asli ke filteredEmployees saat komponen diinisialisasi
+    this.filteredEmployees = [...this.employees];
     this.updatePaging();
   }
 
@@ -247,13 +260,13 @@ export class DashboardComponent {
   getPagedEmployees(): Employee[] {
     this.sortEmployees(); // Terapkan sorting sebelum mem-paginasi
     const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = Math.min(startIndex + this.pageSize, this.employees.length);
-    return this.employees.slice(startIndex, endIndex);
+    const endIndex = Math.min(startIndex + this.pageSize, this.filteredEmployees.length);
+    return this.filteredEmployees.slice(startIndex, endIndex);
   }
 
   // Fungsi untuk memperbarui total halaman
   updatePaging(): void {
-    this.totalPages = Math.ceil(this.employees.length / this.pageSize);
+    this.totalPages = Math.ceil(this.filteredEmployees.length / this.pageSize);
     if (this.currentPage > this.totalPages) {
       this.currentPage = this.totalPages;
     }
@@ -273,14 +286,16 @@ export class DashboardComponent {
     }
   }
 
+  // Metode untuk mengubah jumlah item per halaman
   onChangePageSize(value: string): void {
     this.pageSize = +value;
     this.currentPage = 1; // Kembali ke halaman pertama setiap kali mengubah jumlah item per halaman
     this.updatePaging();
   }
 
+  // Metode untuk sorting
   sortEmployees(): void {
-    this.employees.sort((a, b) => {
+    this.filteredEmployees.sort((a, b) => {
       let aValue = (a as any)[this.sortColumn];
       let bValue = (b as any)[this.sortColumn];
 
@@ -301,6 +316,7 @@ export class DashboardComponent {
     });
   }
 
+  // Metode untuk mengatur kolom sorting
   setSortColumn(column: string): void {
     if (this.sortColumn === column) {
       this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
@@ -309,6 +325,46 @@ export class DashboardComponent {
       this.sortOrder = 'asc';
     }
     this.currentPage = 1; // Reset to first page after sorting
+    this.updatePaging();
+  }
+
+  getDistinctGroups(): string[] {
+    return Array.from(new Set(this.employees.map(employee => employee.group)));
+  }
+
+  getDistinctStatuses(): string[] {
+    return Array.from(new Set(this.employees.map(employee => employee.status)));
+  }
+
+  search(): void {
+    const searchUsername = this.searchUsername.toLowerCase().trim();
+    const searchGroup = this.searchGroup.toLowerCase().trim();
+    const searchStatus = this.searchStatus.toLowerCase().trim();
+
+    // Filter data pada filteredEmployees berdasarkan kriteria pencarian
+    this.filteredEmployees = this.employees.filter(employee => {
+      const matchUsername = employee.username.toLowerCase().includes(searchUsername);
+      const matchGroup = searchGroup === '' || employee.group.toLowerCase() === searchGroup;
+      const matchStatus = searchStatus === '' || employee.status.toLowerCase() === searchStatus;
+      return matchUsername && matchGroup && matchStatus;
+    });
+    console.log(this.filteredEmployees)
+    // Perbarui halaman saat ini dan total halaman
+    this.currentPage = 1;
+    this.updatePaging();
+  }
+
+  // Metode untuk menghapus filter dan menampilkan semua data
+  clearFilter(): void {
+    this.searchUsername = '';
+    this.searchGroup = '';
+    this.searchStatus = '';
+    // Kembalikan data asli ke filteredEmployees
+    this.filteredEmployees = [...this.employees];
+    // Perbarui halaman saat ini dan total halaman
+    this.currentPage = 1;
+    this.updatePaging();
+    this.sortColumn= '';
   }
 
   // Fungsi untuk logout
