@@ -36,6 +36,7 @@
       <option value="10">10</option>
       <option value="20">20</option>
     </select>
+    <button (click)="addEmployee()">Add Employee</button>
   </div>
 
   <table border="1">
@@ -58,16 +59,21 @@
           Group
           <button (click)="setSortColumn('group')">Sort</button>
         </th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let employee of getPagedEmployees(); let i = index">
+      <tr *ngFor="let employee of getPagedEmployees(); let i = index" (click)="navigateToEmployeeDetail(employee.username)">
         <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
         <td>{{ employee.username }}</td>
         <td>{{ employee.firstName }} {{ employee.lastName }}</td>
         <td>{{ employee.email }}</td>
         <td>{{ employee.status }}</td>
         <td>{{ employee.group }}</td>
+        <td>
+          <button>Edit</button>
+          <button>Delete</button>
+        </td>
       </tr>
     </tbody>
   </table>
