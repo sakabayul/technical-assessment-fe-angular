@@ -1,86 +1,154 @@
 <div>
-  <h2>Welcome to the Dashboard</h2>
-  <button (click)="logout()">Logout</button>
+  <!-- Navbar -->
+  <app-navbar></app-navbar>
 
-  <h3>Search Employees</h3>
-  <div>
-    <!-- Input pencarian -->
-    <label for="searchUsername">Search by Username:</label>
-    <input type="text" id="searchUsername" [(ngModel)]="searchUsername">
-    
-    <label for="searchGroup">Search by Group:</label>
-    <select id="searchGroup" [(ngModel)]="searchGroup">
-      <option value="">All</option>
-      <option *ngFor="let group of getDistinctGroups()" [value]="group">{{ group }}</option>
-    </select>
-    
-    <label for="searchStatus">Search by Status:</label>
-    <select id="searchStatus" [(ngModel)]="searchStatus">
-      <option value="">All</option>
-      <option *ngFor="let status of getDistinctStatuses()" [value]="status">{{ status }}</option>
-    </select>
-  
-    <!-- Tombol pencarian -->
-    <button (click)="search()">Search</button>
-    <!-- Tombol untuk membersihkan input pencarian -->
-    <button (click)="clearFilter()">Clear</button>
-  </div>
+  <!-- Main Content -->
+  <main>
+    <h2>Employee List</h2>
 
+    <div class="navigation">
+      <div class="search">
+        <label for="pageSize">
+          <span class="material-symbols-outlined"> page_info </span>
+        </label>
+        <select
+          id="pageSize"
+          [(ngModel)]="pageSize"
+          (ngModelChange)="onChangePageSize($event)"
+        >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+        </select>
+        <!-- Input pencarian -->
+        <label for="searchUsername">
+          <span class="material-symbols-outlined">search</span>
+        </label>
+        <input
+          type="text"
+          id="searchUsername"
+          [(ngModel)]="searchUsername"
+          placeholder="Username"
+        />
 
-  <h3>Employee List</h3>
+        <label for="searchGroup">
+          <span class="material-symbols-outlined">groups</span>
+        </label>
+        <select id="searchGroup" [(ngModel)]="searchGroup">
+          <option value="">All</option>
+          <option *ngFor="let group of getDistinctGroups()" [value]="group">
+            {{ group }}
+          </option>
+        </select>
 
-  <div>
-    <label for="pageSize">Items per page:</label>
-    <select id="pageSize" [(ngModel)]="pageSize" (ngModelChange)="onChangePageSize($event)">
-      <option value="5">5</option>
-      <option value="10">10</option>
-      <option value="20">20</option>
-    </select>
-    <button (click)="addEmployee()">Add Employee</button>
-  </div>
+        <label for="searchStatus">
+          <span class="material-symbols-outlined">group</span>
+        </label>
+        <select id="searchStatus" [(ngModel)]="searchStatus">
+          <option value="">All</option>
+          <option *ngFor="let status of getDistinctStatuses()" [value]="status">
+            {{ status }}
+          </option>
+        </select>
 
-  <table border="1">
-    <thead>
-      <tr>
-        <th>No</th>
-        <th>
-          Username
-        </th>
-        <th>
-          Full Name
-          <button (click)="setSortColumn('firstName')">Sort</button>
-        </th>
-        <th>Email</th>
-        <th>
-          Status
-          <button (click)="setSortColumn('status')">Sort</button>
-        </th>
-        <th>
-          Group
-          <button (click)="setSortColumn('group')">Sort</button>
-        </th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let employee of getPagedEmployees(); let i = index" (click)="navigateToEmployeeDetail(employee.username)">
-        <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
-        <td>{{ employee.username }}</td>
-        <td>{{ employee.firstName }} {{ employee.lastName }}</td>
-        <td>{{ employee.email }}</td>
-        <td>{{ employee.status }}</td>
-        <td>{{ employee.group }}</td>
-        <td>
-          <button>Edit</button>
-          <button>Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        <!-- Tombol pencarian -->
+        <button (click)="search()" class="search-button">Search</button>
+        <!-- Tombol untuk membersihkan input pencarian -->
+        <button (click)="clearFilter()">
+          <span class="material-symbols-outlined">refresh</span>
+        </button>
+      </div>
+      <button (click)="addEmployee()" class="btn-add">
+        <span class="material-symbols-outlined"> add </span>
+      </button>
+    </div>
 
-  <div>
-    <button [disabled]="currentPage === 1" (click)="prevPage()">Previous</button>
-    Page {{ currentPage }} of {{ totalPages }}
-    <button [disabled]="currentPage === totalPages" (click)="nextPage()">Next</button>
-  </div>
+    <div class="table">
+      <table border="1">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Username</th>
+            <th (click)="setSortColumn('firstName')">
+              Full Name
+              <button>
+                <span class="material-symbols-outlined">swap_vert</span>
+              </button>
+            </th>
+            <th>Email</th>
+            <th (click)="setSortColumn('status')">
+              Status
+              <button>
+                <span class="material-symbols-outlined">swap_vert</span>
+              </button>
+            </th>
+            <th (click)="setSortColumn('group')">
+              Group
+              <button>
+                <span class="material-symbols-outlined">swap_vert</span>
+              </button>
+            </th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of getPagedEmployees(); let i = index">
+            <td (click)="navigateToEmployeeDetail(employee.username)">
+              {{ (currentPage - 1) * pageSize + i + 1 }}
+            </td>
+            <td (click)="navigateToEmployeeDetail(employee.username)">
+              {{ employee.username }}
+            </td>
+            <td (click)="navigateToEmployeeDetail(employee.username)">
+              {{ employee.firstName }} {{ employee.lastName }}
+            </td>
+            <td (click)="navigateToEmployeeDetail(employee.username)">
+              {{ employee.email }}
+            </td>
+            <td (click)="navigateToEmployeeDetail(employee.username)">
+              {{ employee.status }}
+            </td>
+            <td (click)="navigateToEmployeeDetail(employee.username)">
+              {{ employee.group }}
+            </td>
+            <td class="action">
+              <button>
+                <span
+                  class="material-symbols-outlined"
+                  (click)="editToEmployee(employee.username)"
+                >
+                  edit
+                </span>
+              </button>
+              <button>
+                <span
+                  class="material-symbols-outlined"
+                  (click)="openModal(employee.username)"
+                >
+                  delete
+                </span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <app-modal
+              [title]="'Confirm'"
+              [message]="'Are you sure to logout?'"
+              [isVisible]="modalVisible"
+              (yes)="delateToEmployee()"
+              (no)="onClose()"
+              (close)="onClose()"
+            ></app-modal>
+    <div class="pagination">
+      <button [disabled]="currentPage === 1" (click)="prevPage()">
+        <span class="material-symbols-outlined"> chevron_left </span>
+      </button>
+      {{ currentPage }} of {{ totalPages }}
+      <button [disabled]="currentPage === totalPages" (click)="nextPage()">
+        <span class="material-symbols-outlined"> chevron_right </span>
+      </button>
+    </div>
+  </main>
 </div>

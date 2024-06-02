@@ -1,0 +1,14 @@
+<nav>
+  <ul>
+    <li><a routerLink="/"><strong>Dashboard</strong></a></li>
+    <button (click)="openModal()"><span class="material-symbols-outlined">output</span></button>
+  </ul>
+  <app-modal
+    [title]="'Confirm'"
+    [message]="'Are you sure to logout?'"
+    [isVisible]="modalVisible"
+    (yes)="logout()"
+    (no)="onClose()"
+    (close)="onClose()"
+  ></app-modal>
+</nav>

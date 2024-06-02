@@ -1,0 +1,15 @@
+<div class="modal" [class.active]="isVisible">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>{{ title }}</h2>
+      <span class="close" (click)="onClose()">&times;</span>
+    </div>
+    <div class="modal-body">
+      <p>{{ message }}</p>
+    </div>
+    <div class="modal-footer">
+      <button (click)="onYes()">Yes</button>
+      <button (click)="onNo()">No</button>
+    </div>
+  </div>
+</div>

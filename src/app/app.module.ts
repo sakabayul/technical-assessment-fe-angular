@@ -7,6 +7,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { AddEmployeeComponent } from './pages/add-employee/add-employee.component';
 import { EmployeeDetailComponent } from './pages/employee-detail/employee-detail.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { EmployeeDetailComponent } from './pages/employee-detail/employee-detail
     LoginComponent,
     DashboardComponent,
     AddEmployeeComponent,
-    EmployeeDetailComponent
+    EmployeeDetailComponent,
+    NavbarComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

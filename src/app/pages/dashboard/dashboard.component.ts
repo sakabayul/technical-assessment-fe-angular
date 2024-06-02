@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Employee } from '../../model/data.model';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth/service/auth.service';
 import { employees } from '../../data/employees.data';
 
 @Component({
@@ -29,7 +28,11 @@ export class DashboardComponent {
   searchGroup: string = ''; // Input search berdasarkan group
   searchStatus: string = ''; // Input search berdasarkan status
 
-  constructor(private authService: AuthService, private router: Router) { }
+  // Properti untuk popup modal
+  modalVisible: boolean = false;
+  selectedUsername: string | null = null;
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     // Salin data asli ke filteredEmployees saat komponen diinisialisasi
@@ -109,10 +112,12 @@ export class DashboardComponent {
     this.updatePaging();
   }
 
+  // Mengambil group dari employee
   getDistinctGroups(): string[] {
     return Array.from(new Set(this.employees.map(employee => employee.group)));
   }
 
+  // Mengambil status dari employee
   getDistinctStatuses(): string[] {
     return Array.from(new Set(this.employees.map(employee => employee.status)));
   }
@@ -148,11 +153,7 @@ export class DashboardComponent {
     this.sortColumn= '';
   }
 
-  // Fungsi untuk logout
-  logout(): void {
-    this.authService.logout();
-  }
-
+  // Fitur untuk menambahkan data employee
   addEmployee(): void {
     this.router.navigate(['/dashboard/add-employee']);
   }
@@ -161,5 +162,31 @@ export class DashboardComponent {
   navigateToEmployeeDetail(username: string): void {
     // Rute bernama 'employee-detail/:username'
     this.router.navigate(['/dashboard/employee-detail', username]);
+  }
+
+  //Fitur untuk edit employee
+  editToEmployee(username: string): void {
+    console.log("Edit: "+username);
+  }
+
+  // Fitur untuk membuka modal
+  openModal(username: string) {
+    this.modalVisible = true;
+    this.selectedUsername = username;
+  }
+
+  //Fitur untuk delate employee
+  delateToEmployee(): void {
+    if (this.selectedUsername) {
+      console.log("Delete: " + this.selectedUsername);
+      // Tambahkan logika penghapusan di sini
+    } else {
+      console.log("No username selected.");
+    }
+  }
+
+  //Fitur untuk menutup modal
+  onClose() {
+    this.modalVisible = false; // Menutup modal ketika tombol close diklik
   }
 }
