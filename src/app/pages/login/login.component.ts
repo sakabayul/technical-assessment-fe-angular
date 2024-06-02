@@ -17,8 +17,11 @@ export class LoginComponent {
   login(): void {
     if (this.authService.login(this.username, this.password)) {
       this.router.navigate(['/dashboard']);
-    } else {
-      alert('Login failed');
+    } else if(this.username == "" || this.password === ""){
+      alert('Username or password should not be blank!');
+    }
+    else {
+      alert('Wrong username or password!');
     }
   }
 }
