@@ -1,159 +1,226 @@
-main{
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 10px;
-    margin: 20px 3%;
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+  margin: 20px 3%;
 }
-
-
 
 /* Search */
-.search{
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 15px;
-    background-color: rgba(252,176,69,1);
+.search {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 15px;
+  background-color: rgba(252, 176, 69, 1);
 }
-.search label{
-    display: grid;
-    place-items: center;
+.search label {
+  display: grid;
+  place-items: center;
 }
-.search label span{
-    font-size: 1.7rem;
-    color: #833ab4;
+.search label span {
+  font-size: 1.7rem;
+  color: #833ab4;
 }
-.search input{
-    height: 25px;
-    padding: 0 10px;
-    margin-right: 10px;
+.search input {
+  height: 25px;
+  padding: 0 10px;
+  margin-right: 10px;
 }
-.search select{
-    height: 27px;
-    cursor: pointer;
-    margin-right: 10px;
+.search select {
+  height: 27px;
+  cursor: pointer;
+  margin-right: 10px;
 }
-.search button{
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    margin-left: 10px;
-    border: none;
-    background: none;
+.search button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 10px;
+  border: none;
+  background: none;
 }
-.search button span{
-    font-size: 1.7rem;
-    color: #833ab4;
-    transition: .7s ease;
+.search button span {
+  font-size: 1.7rem;
+  color: #ffffff;
+  transition: 0.7s ease;
 }
-.search button :hover{
-    color: #632a89;
-    transform: rotate(360deg);
+.search button.refresh :hover {
+  color: #632a89;
+  transform: rotate(360deg);
 }
-.search .search-button{
-    padding: 5px 13px;
-    color: white;
-    background-color: #833ab4;
-    transition: .3s ease;
+.search .search-button {
+  padding: 5px 13px;
+  color: white;
+  background-color: #833ab4;
+  transition: 0.3s ease;
 }
-.search .search-button:hover{
-    background-color: #58227c;
+.search .search-button:hover {
+  background-color: #58227c;
 }
-
-
+.btn-add-search {
+  display: none;
+}
 
 /* Navigation */
-.navigation{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
-.navigation .btn-add{
-    cursor: pointer;
-    border: none;
-    color: white;
-    background-color: #833ab4;
-    transition: .3s ease;
+.navigation .search .search-label {
+  display: flex;
 }
-.navigation .btn-add:hover{
-    color: #833ab4;
-    background-color: rgba(252,176,69,1);
+.navigation .search .search-label label {
+  margin-right: 10px;
 }
-
-
+.navigation .btn-add {
+  cursor: pointer;
+  border: none;
+  color: white;
+  background-color: #833ab4;
+  transition: 0.3s ease;
+}
+.navigation .btn-add:hover {
+  color: #833ab4;
+  background-color: rgba(252, 176, 69, 1);
+}
 
 /* Table */
-.table{
-    width: 100%;
-    overflow: auto;
+.mobile {
+  display: none;
+}
+.mobile table {
+  width: 100%;
+  min-width: 0px;
+  border-collapse: collapse;
+}
+.table {
+  width: 100%;
+  overflow: auto;
 }
 table {
-    width: 100%;
-    min-width: 840px;
-    border-collapse: collapse;
+  width: 100%;
+  min-width: 990px;
+  border-collapse: collapse;
 }
 table thead tr {
-    color: white;
-    background-color: #833ab4;
+  color: white;
+  background-color: #833ab4;
 }
 table thead th button {
-    cursor: pointer;
-    border: none;
-    color: white;
-    background: none;
+  cursor: pointer;
+  border: none;
+  color: white;
+  background: none;
 }
 table thead th span {
-    display: flex;
-    align-items: center;
-    font-size: 1rem;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
 }
 table tbody tr {
-    cursor: pointer;
+  cursor: pointer;
 }
 table tbody tr:hover {
-    background-color: rgba(252, 176, 69, 0.5); /* Menurunkan opasitas agar tidak terlalu berbeda */
+  background-color: rgba(
+    252,
+    176,
+    69,
+    0.5
+  ); /* Menurunkan opasitas agar tidak terlalu berbeda */
 }
-table tbody tr td{
-    padding: 0 10px;
+table tbody tr td {
+  padding: 0 10px;
 }
 table tbody .action {
-    text-align: center; /* Mengatur tata letak teks agar berada di tengah */
+  text-align: center; /* Mengatur tata letak teks agar berada di tengah */
 }
 table tbody .action button {
-    cursor: pointer;
-    background: none;
-    border: none;
-    font-size: 1rem; /* Atur ukuran font */
-    color: #833ab4; /* Warna teks */
-    transition: color 0.3s; /* Efek transisi untuk perubahan warna */
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1rem; /* Atur ukuran font */
+  color: #833ab4; /* Warna teks */
+  transition: color 0.3s; /* Efek transisi untuk perubahan warna */
 }
 table tbody .action button:hover {
-    color: rgba(252, 176, 69, 1); /* Warna teks saat dihover */
+  color: rgba(252, 176, 69, 1); /* Warna teks saat dihover */
 }
-
-
-
 
 /* Paginations */
-.pagination{
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.pagination button{
-    cursor: pointer;
-    border: none;
-    color: white;
-    background-color: #833ab4;
+.pagination button {
+  cursor: pointer;
+  border: none;
+  color: white;
+  background-color: #833ab4;
+  transition: .3s ease;
 }
 .pagination button:hover {
-    background-color: #632a89; /* Ubah warna latar belakang */
+  background-color: #632a89; /* Ubah warna latar belakang */
 }
 /* Tombol pagination yang dinonaktifkan */
 .pagination button:disabled {
-    cursor: not-allowed; /* Mengubah kursor menjadi not-allowed saat tombol dinonaktifkan */
-    background-color: #ccc; /* Warna latar belakang yang lebih ringan */
-    color: #666; /* Warna teks yang lebih ringan */
+  cursor: not-allowed; /* Mengubah kursor menjadi not-allowed saat tombol dinonaktifkan */
+  background-color: #ccc; /* Warna latar belakang yang lebih ringan */
+  color: #666; /* Warna teks yang lebih ringan */
+}
+
+@media screen and (max-width: 1060px) {
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  /* Navigation */
+  .navigation {
+    display: flex;
+  }
+  .navigation .search {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+  }
+  .navigation .search input {
+    width: 100%;
+  }
+  .navigation .search button {
+    margin: 0;
+  }
+  .navigation .search .search-label {
+    display: flex;
+  }
+  .navigation .search .btn {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .navigation .search .search-label label {
+    margin-right: 10px;
+  }
+  .navigation .search .search-label select {
+    width: 100%;
+  }
+  .btn-add-search {
+    display: block;
+    background-color: #833ab4;
+    transition: .3s ease;
+  }
+  .btn-add-search:hover {
+    background-color: #632a89;
+  }
+  .btn-add {
+    display: none;
+  }
 }

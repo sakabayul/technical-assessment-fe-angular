@@ -15,7 +15,7 @@ export class ModalComponent {
   @Output() close = new EventEmitter<void>(); // Menambahkan event untuk menutup modal
 
   onClose() {
-    this.close.emit(); // Memancarkan event penutupan modal
+    this.close.emit(); // Tombol event penutupan modal
   }
 
   onYes() {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Employee } from '../../model/data.model';
 import { Router } from '@angular/router';
 import { employees } from '../../data/employees.data';
+import { SearchService } from '../../auth/service/search.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,17 +28,22 @@ export class DashboardComponent {
   searchUsername: string = ''; // Input search berdasarkan username
   searchGroup: string = ''; // Input search berdasarkan group
   searchStatus: string = ''; // Input search berdasarkan status
+  searchTerm: string = ''; // Simpan data search
 
   // Properti untuk popup modal
   modalVisible: boolean = false;
   selectedUsername: string | null = null;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private searchService: SearchService) { }
 
   ngOnInit(): void {
+    const searchCriteria = this.searchService.getSearchCriteria();
+    this.searchUsername = searchCriteria.username;
+    this.searchGroup = searchCriteria.group;
+    this.searchStatus = searchCriteria.status;
     // Salin data asli ke filteredEmployees saat komponen diinisialisasi
     this.filteredEmployees = [...this.employees];
-    this.updatePaging();
+    this.search();  // Menjalankan pencarian saat inisialisasi
   }
 
   // Fungsi untuk menetapkan data karyawan pada halaman yang dipilih
@@ -136,6 +142,7 @@ export class DashboardComponent {
     });
     console.log(this.filteredEmployees)
     // Perbarui halaman saat ini dan total halaman
+    this.searchService.setSearchCriteria(this.searchUsername, this.searchGroup, this.searchStatus);
     this.currentPage = 1;
     this.updatePaging();
   }

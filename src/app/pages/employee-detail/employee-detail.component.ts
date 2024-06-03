@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Employee } from '../../model/data.model';
 import { SelectedEmployeeService } from '../../auth/service/selected-employee.service';
@@ -14,7 +15,8 @@ export class EmployeeDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private employeeService: SelectedEmployeeService
+    private employeeService: SelectedEmployeeService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -29,5 +31,9 @@ export class EmployeeDetailComponent implements OnInit {
     this.employeeService.selectedEmployee$.subscribe((employee: Employee | null) => {
       this.employee = employee;
     });
+  }
+  
+  goToDashboard(): void {
+    this.router.navigate(['/dashboard']);
   }
 }

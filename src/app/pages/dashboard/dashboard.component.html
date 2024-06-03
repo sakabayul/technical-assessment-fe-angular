@@ -8,92 +8,124 @@
 
     <div class="navigation">
       <div class="search">
-        <label for="pageSize">
-          <span class="material-symbols-outlined"> page_info </span>
-        </label>
-        <select
-          id="pageSize"
-          [(ngModel)]="pageSize"
-          (ngModelChange)="onChangePageSize($event)"
-        >
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-        </select>
+        <div class="search-label">
+          <label for="pageSize">
+            <span class="material-symbols-outlined"> page_info </span>
+          </label>
+          <select
+            id="pageSize"
+            [(ngModel)]="pageSize"
+            (ngModelChange)="onChangePageSize($event)"
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+          </select>
+        </div>
+
         <!-- Input pencarian -->
-        <label for="searchUsername">
-          <span class="material-symbols-outlined">search</span>
-        </label>
-        <input
-          type="text"
-          id="searchUsername"
-          [(ngModel)]="searchUsername"
-          placeholder="Username"
-        />
+        <div class="search-label">
+          <label for="searchUsername">
+            <span class="material-symbols-outlined">search</span>
+          </label>
+          <input
+            type="text"
+            id="searchUsername"
+            [(ngModel)]="searchUsername"
+            placeholder="Username"
+          />
+        </div>
 
-        <label for="searchGroup">
-          <span class="material-symbols-outlined">groups</span>
-        </label>
-        <select id="searchGroup" [(ngModel)]="searchGroup">
-          <option value="">All</option>
-          <option *ngFor="let group of getDistinctGroups()" [value]="group">
-            {{ group }}
-          </option>
-        </select>
+        <div class="search-label">
+          <label for="searchGroup">
+            <span class="material-symbols-outlined">groups</span>
+          </label>
+          <select id="searchGroup" [(ngModel)]="searchGroup">
+            <option value="">All</option>
+            <option *ngFor="let group of getDistinctGroups()" [value]="group">
+              {{ group }}
+            </option>
+          </select>
+        </div>
 
-        <label for="searchStatus">
-          <span class="material-symbols-outlined">group</span>
-        </label>
-        <select id="searchStatus" [(ngModel)]="searchStatus">
-          <option value="">All</option>
-          <option *ngFor="let status of getDistinctStatuses()" [value]="status">
-            {{ status }}
-          </option>
-        </select>
+        <div class="search-label">
+          <label for="searchStatus">
+            <span class="material-symbols-outlined">group</span>
+          </label>
+          <select id="searchStatus" [(ngModel)]="searchStatus">
+            <option value="">All</option>
+            <option
+              *ngFor="let status of getDistinctStatuses()"
+              [value]="status"
+            >
+              {{ status }}
+            </option>
+          </select>
+        </div>
 
         <!-- Tombol pencarian -->
-        <button (click)="search()" class="search-button">Search</button>
-        <!-- Tombol untuk membersihkan input pencarian -->
-        <button (click)="clearFilter()">
-          <span class="material-symbols-outlined">refresh</span>
-        </button>
+        <div class="search-label btn">
+          <button (click)="search()" class="search-button">Search</button>
+          <!-- Tombol untuk membersihkan input pencarian -->
+          <button class="refresh" (click)="clearFilter()">
+            <span class="material-symbols-outlined">refresh</span>
+          </button>
+          <div class="btn-add-search">
+          <button (click)="addEmployee()">
+            <span class="material-symbols-outlined"> add </span>
+          </button>
+        </div>
+        </div>
       </div>
+
       <button (click)="addEmployee()" class="btn-add">
         <span class="material-symbols-outlined"> add </span>
       </button>
     </div>
 
-    <div class="table">
+    <div class="table desktop">
       <table border="1">
         <thead>
           <tr>
-            <th>No</th>
-            <th>Username</th>
-            <th (click)="setSortColumn('firstName')">
+            <th style="width: 50px; text-align: center">No</th>
+            <th style="width: 230px; text-align: center">Username</th>
+            <th
+              (click)="setSortColumn('firstName')"
+              style="width: 230px; text-align: center"
+            >
               Full Name
               <button>
                 <span class="material-symbols-outlined">swap_vert</span>
               </button>
             </th>
-            <th>Email</th>
-            <th (click)="setSortColumn('status')">
+            <th style="width: 400px; text-align: center">Email</th>
+            <th
+              (click)="setSortColumn('status')"
+              style="width: 180px; text-align: center"
+            >
               Status
               <button>
                 <span class="material-symbols-outlined">swap_vert</span>
               </button>
             </th>
-            <th (click)="setSortColumn('group')">
+            <th
+              (click)="setSortColumn('group')"
+              style="width: 180px; text-align: center"
+            >
               Group
               <button>
                 <span class="material-symbols-outlined">swap_vert</span>
               </button>
             </th>
-            <th>Action</th>
+            <th style="width: 100px; text-align: center">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let employee of getPagedEmployees(); let i = index">
-            <td (click)="navigateToEmployeeDetail(employee.username)">
+            <td
+              (click)="navigateToEmployeeDetail(employee.username)"
+              style="text-align: center"
+            >
               {{ (currentPage - 1) * pageSize + i + 1 }}
             </td>
             <td (click)="navigateToEmployeeDetail(employee.username)">
@@ -133,14 +165,67 @@
         </tbody>
       </table>
     </div>
+
+    <div class="table mobile">
+      <table border="1">
+        <thead>
+          <tr>
+            <th style="width: 50px; text-align: center">No</th>
+            <th
+              (click)="setSortColumn('firstName')"
+              style="width: 230px; text-align: center"
+            >
+              Full Name
+              <button>
+                <span class="material-symbols-outlined">swap_vert</span>
+              </button>
+            </th>
+            <th style="width: 100px; text-align: center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of getPagedEmployees(); let i = index">
+            <td
+              (click)="navigateToEmployeeDetail(employee.username)"
+              style="text-align: center"
+            >
+              {{ (currentPage - 1) * pageSize + i + 1 }}
+            </td>
+            <td (click)="navigateToEmployeeDetail(employee.username)">
+              {{ employee.firstName }} {{ employee.lastName }}
+            </td>
+            <td class="action">
+              <button>
+                <span
+                  class="material-symbols-outlined"
+                  (click)="editToEmployee(employee.username)"
+                >
+                  edit
+                </span>
+              </button>
+              <button>
+                <span
+                  class="material-symbols-outlined"
+                  (click)="openModal(employee.username)"
+                >
+                  delete
+                </span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <app-modal
-              [title]="'Confirm'"
-              [message]="'Are you sure to logout?'"
-              [isVisible]="modalVisible"
-              (yes)="delateToEmployee()"
-              (no)="onClose()"
-              (close)="onClose()"
-            ></app-modal>
+      [title]="'Confirm'"
+      [message]="'Are you sure to logout?'"
+      [isVisible]="modalVisible"
+      (yes)="delateToEmployee()"
+      (no)="onClose()"
+      (close)="onClose()"
+    >
+    </app-modal>
     <div class="pagination">
       <button [disabled]="currentPage === 1" (click)="prevPage()">
         <span class="material-symbols-outlined"> chevron_left </span>

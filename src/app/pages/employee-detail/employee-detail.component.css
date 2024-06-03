@@ -1,0 +1,55 @@
+.employee-container{
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.employee-detail {
+    font-family: 'Arial', sans-serif; /* Font family */
+    width: 80%;
+    max-width: 600px; /* Max width for the container */
+    padding: 20px; /* Padding around the container */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.339); /* Subtle shadow for depth */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f9f9f9; /* Background color for the container */
+  }
+  
+  .employee-detail h2 {
+    color: #333; /* Header color */
+    margin-bottom: 20px; /* Space below the header */
+  }
+  
+  .employee-detail p {
+    margin: 10px 0; /* Space between paragraphs */
+    font-size: 16px; /* Font size */
+  }
+  
+  .employee-detail strong {
+    color: #632a89; /* Color for the strong text */
+  }
+  
+  .employee-detail div:not(:last-child) {
+    margin-bottom: 15px; /* Space between each section */
+  }
+  
+  .employee-detail .no-data {
+    color: #888; /* Color for the no data text */
+  }
+  
+  /* Tambahkan gaya untuk tombol OK */
+.employee-detail button {
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+    background-color: #833ab4;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+  }
+  
+  .employee-detail button:hover {
+    background-color: #632a89;
+  }
