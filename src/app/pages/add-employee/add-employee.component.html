@@ -1,1 +1,144 @@
-<p>add-employee works!</p>
+<div class="container">
+  <div class="add-employee">
+    <h2>Add Employee</h2>
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="username">Username</label>
+        <input id="username" formControlName="username" type="text" placeholder="Username" />
+        <div
+          class="required"
+          *ngIf="
+            employeeForm.get('username')?.invalid &&
+            employeeForm.get('username')?.touched
+          "
+        >
+          Username is required
+        </div>
+      </div>
+
+      <div>
+        <label for="firstName">First Name</label>
+        <input id="firstName" formControlName="firstName" type="text" placeholder="First Name" />
+        <div
+          class="required"
+          *ngIf="
+            employeeForm.get('firstName')?.invalid &&
+            employeeForm.get('firstName')?.touched
+          "
+        >
+          First Name is required
+        </div>
+      </div>
+
+      <div>
+        <label for="lastName">Last Name</label>
+        <input id="lastName" formControlName="lastName" type="text" placeholder="Last Name" />
+        <div
+          class="required"
+          *ngIf="
+            employeeForm.get('lastName')?.invalid &&
+            employeeForm.get('lastName')?.touched
+          "
+        >
+          Last Name is required
+        </div>
+      </div>
+
+      <div>
+        <label for="email">Email</label>
+        <input id="email" formControlName="email" type="email" placeholder="Example@gmail.com" />
+        <div
+          class="required"
+          *ngIf="
+            employeeForm.get('email')?.invalid &&
+            employeeForm.get('email')?.touched
+          "
+        >
+          Invalid email format
+        </div>
+      </div>
+
+      <div>
+        <label for="birthDate">Birth Date</label>
+        <input
+          id="birthDate"
+          formControlName="birthDate"
+          type="date"
+          max="{{ today }}"
+        />
+        <div
+          class="required"
+          *ngIf="
+            employeeForm.get('birthDate')?.invalid &&
+            employeeForm.get('birthDate')?.touched
+          "
+        >
+          Birth Date is required and cannot be in the future
+        </div>
+      </div>
+
+      <div>
+        <label for="basicSalary">Basic Salary</label>
+        <input id="basicSalary" formControlName="basicSalary" type="number" placeholder="Basic Salary" />
+        <div
+          class="required"
+          *ngIf="
+            employeeForm.get('basicSalary')?.invalid &&
+            employeeForm.get('basicSalary')?.touched
+          "
+        >
+          Basic Salary must be a number
+        </div>
+      </div>
+
+      <div>
+        <label for="status">Status</label>
+        <input id="status" formControlName="status" type="text" placeholder="Status" />
+        <div
+          class="required"
+          *ngIf="
+            employeeForm.get('status')?.invalid &&
+            employeeForm.get('status')?.touched
+          "
+        >
+          Status is required
+        </div>
+      </div>
+
+      <div>
+        <label for="group">Group</label>
+        <select id="group" formControlName="group">
+          <option *ngFor="let group of groups" [value]="group">
+            {{ group }}
+          </option>
+        </select>
+        <div
+          class="required"
+          *ngIf="
+            employeeForm.get('group')?.invalid &&
+            employeeForm.get('group')?.touched
+          "
+        >
+          Group is required
+        </div>
+      </div>
+
+      <div>
+        <label for="description">Description</label>
+        <input id="description" formControlName="description" type="text" placeholder="Description" />
+        <div
+          class="required"
+          *ngIf="
+            employeeForm.get('description')?.invalid &&
+            employeeForm.get('description')?.touched
+          "
+        >
+          Description is required
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="employeeForm.invalid">Save</button>
+      <button type="button" (click)="onCancel()">Cancel</button>
+    </form>
+  </div>
+</div>

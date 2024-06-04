@@ -173,8 +173,8 @@ export class DashboardComponent {
   }
 
   //Fitur untuk edit employee
-  editToEmployee(username: string): void {
-    this.alertService.showAlert('Successfully edit username '+username);
+  editToEmployee(message: string, color: string): void {
+    this.alertService.showAlert(message, color);
   }
 
   // Fitur untuk membuka modal
@@ -184,10 +184,10 @@ export class DashboardComponent {
   }
 
   //Fitur untuk delate employee
-  delateToEmployee(): void {
+  delateToEmployee(message: string, color: string): void {
     if (this.selectedUsername) {
       // Tambahkan logika penghapusan di sini
-      this.alertService.showAlert('Successfully delate username '+this.selectedUsername);
+      this.alertService.showAlert(message + this.selectedUsername, color);
     } else {
       console.log("No username selected.");
     }

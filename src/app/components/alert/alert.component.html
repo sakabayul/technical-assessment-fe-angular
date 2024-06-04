@@ -1,8 +1,15 @@
 <div
-  *ngFor="let message of alertMessages; let i = index"
+  *ngFor="let alert of alertMessages; let i = index"
   class="alert"
-  [style.top.px]="i * 80 + 20"
+  [ngStyle]="{ 'background-color': alert.color, 'top.px': i * 60 + 20 }"
 >
-  <strong>{{ message }}</strong>
-  <span class="closebtn" (click)="closeAlert(message)">&times;</span>
+  <strong [ngStyle]="{ color: alert.color === 'red' ? 'white' : 'black' }">
+    {{ alert.message }}</strong
+  >
+  <span
+    class="closebtn"
+    (click)="closeAlert(alert.message)"
+    [ngStyle]="{ color: alert.color === 'red' ? 'white' : 'black' }"
+    >&times;</span
+  >
 </div>

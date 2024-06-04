@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
+interface Alert {
+  message: string;
+  color: string;
+  timeoutId: any;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AlertService {
-  private alertSubject = new Subject<string[]>();
-  private messages: { message: string, timeoutId: any }[] = [];
+  private alertSubject = new Subject<Alert[]>();
+  private messages: Alert[] = [];
 
   getAlert() {
     return this.alertSubject.asObservable();
   }
 
-  showAlert(message: string) {
+  showAlert(message: string, color: string) {
     if (this.messages.length >= 3) {
       const oldestMessage = this.messages.shift();
       if (oldestMessage) {
@@ -21,8 +27,8 @@ export class AlertService {
     }
 
     const timeoutId = setTimeout(() => this.removeAlert(message), 2000);
-    this.messages.push({ message, timeoutId });
-    this.alertSubject.next(this.messages.map(m => m.message));
+    this.messages.push({ message, color, timeoutId });
+    this.alertSubject.next(this.messages);
   }
 
   removeAlert(message: string) {
@@ -30,7 +36,7 @@ export class AlertService {
     if (index !== -1) {
       clearTimeout(this.messages[index].timeoutId);
       this.messages.splice(index, 1);
-      this.alertSubject.next(this.messages.map(m => m.message));
+      this.alertSubject.next(this.messages);
     }
   }
 }

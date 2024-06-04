@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/auth/service/alert.service';
 
+interface Alert {
+  message: string;
+  color: string;
+}
+
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.css']
 })
+
 export class AlertComponent implements OnInit {
-  alertMessages: string[] = [];
+  alertMessages: Alert[] = [];
 
   constructor(private alertService: AlertService) {}
 

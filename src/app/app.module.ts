@@ -6,6 +6,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { AddEmployeeComponent } from './pages/add-employee/add-employee.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { EmployeeDetailComponent } from './pages/employee-detail/employee-detail.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ModalComponent } from './components/modal/modal.component';
@@ -25,6 +26,7 @@ import { AlertComponent } from './components/alert/alert.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule
   ],
   providers: [],

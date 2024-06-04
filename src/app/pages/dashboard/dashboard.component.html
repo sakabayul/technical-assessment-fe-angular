@@ -149,7 +149,7 @@
               <button>
                 <span
                   class="material-symbols-outlined"
-                  (click)="editToEmployee(employee.username)"
+                  (click)="editToEmployee('Successfully delate username '+ employee.username, 'yellow')"
                 >
                   edit
                 </span>
@@ -218,7 +218,7 @@
               <button>
                 <span
                   class="material-symbols-outlined"
-                  (click)="editToEmployee(employee.username)"
+                  (click)="editToEmployee('Successfully delate username '+ employee.username, 'yellow')"
                 >
                   edit
                 </span>
@@ -239,13 +239,14 @@
 
     <app-modal
       [title]="'Confirm'"
-      [message]="'Are you sure to logout?'"
+      [message]="'Are you sure to delate?'"
       [isVisible]="modalVisible"
-      (yes)="delateToEmployee()"
+      (yes)="delateToEmployee('Successfully delate username ', 'red')"
       (no)="onClose()"
       (close)="onClose()"
     >
     </app-modal>
+    
     <div class="pagination">
       <button [disabled]="currentPage === 1" (click)="prevPage()">
         <span class="material-symbols-outlined"> chevron_left </span>
