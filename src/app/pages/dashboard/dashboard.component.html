@@ -71,10 +71,10 @@
             <span class="material-symbols-outlined">refresh</span>
           </button>
           <div class="btn-add-search">
-          <button (click)="addEmployee()">
-            <span class="material-symbols-outlined"> add </span>
-          </button>
-        </div>
+            <button (click)="addEmployee()">
+              <span class="material-symbols-outlined"> add </span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -82,6 +82,8 @@
         <span class="material-symbols-outlined"> add </span>
       </button>
     </div>
+
+    <app-alert></app-alert>
 
     <div class="table desktop">
       <table border="1">
@@ -180,6 +182,20 @@
                 <span class="material-symbols-outlined">swap_vert</span>
               </button>
             </th>
+            <th style="width: 180px; text-align: center">
+              <div class="status" (click)="setSortColumn('status')">
+                Status
+                <button>
+                  <span class="material-symbols-outlined">swap_vert</span>
+                </button>
+              </div>
+              <div class="group" (click)="setSortColumn('group')">
+                Group
+                <button>
+                  <span class="material-symbols-outlined">swap_vert</span>
+                </button>
+              </div>
+            </th>
             <th style="width: 100px; text-align: center">Action</th>
           </tr>
         </thead>
@@ -193,6 +209,10 @@
             </td>
             <td (click)="navigateToEmployeeDetail(employee.username)">
               {{ employee.firstName }} {{ employee.lastName }}
+            </td>
+            <td class="status-group" (click)="navigateToEmployeeDetail(employee.username)">
+              {{ employee.status }} <br> <hr style="border: 1px solid rgba(0, 0, 0, 0.2);">
+              {{ employee.group }}
             </td>
             <td class="action">
               <button>

@@ -3,6 +3,7 @@ import { Employee } from '../../model/data.model';
 import { Router } from '@angular/router';
 import { employees } from '../../data/employees.data';
 import { SearchService } from '../../auth/service/search.service';
+import { AlertService } from 'src/app/auth/service/alert.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,7 +35,7 @@ export class DashboardComponent {
   modalVisible: boolean = false;
   selectedUsername: string | null = null;
 
-  constructor(private router: Router, private searchService: SearchService) { }
+  constructor(private router: Router, private searchService: SearchService, private alertService: AlertService) { }
 
   ngOnInit(): void {
     const searchCriteria = this.searchService.getSearchCriteria();
@@ -173,7 +174,7 @@ export class DashboardComponent {
 
   //Fitur untuk edit employee
   editToEmployee(username: string): void {
-    console.log("Edit: "+username);
+    this.alertService.showAlert('Successfully edit username '+username);
   }
 
   // Fitur untuk membuka modal
@@ -185,8 +186,8 @@ export class DashboardComponent {
   //Fitur untuk delate employee
   delateToEmployee(): void {
     if (this.selectedUsername) {
-      console.log("Delete: " + this.selectedUsername);
       // Tambahkan logika penghapusan di sini
+      this.alertService.showAlert('Successfully delate username '+this.selectedUsername);
     } else {
       console.log("No username selected.");
     }

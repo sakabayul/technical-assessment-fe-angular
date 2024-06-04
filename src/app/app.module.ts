@@ -9,6 +9,7 @@ import { AddEmployeeComponent } from './pages/add-employee/add-employee.componen
 import { EmployeeDetailComponent } from './pages/employee-detail/employee-detail.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ModalComponent } from './components/modal/modal.component';
     AddEmployeeComponent,
     EmployeeDetailComponent,
     NavbarComponent,
-    ModalComponent
+    ModalComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

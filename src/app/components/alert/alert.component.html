@@ -1,0 +1,8 @@
+<div
+  *ngFor="let message of alertMessages; let i = index"
+  class="alert"
+  [style.top.px]="i * 80 + 20"
+>
+  <strong>{{ message }}</strong>
+  <span class="closebtn" (click)="closeAlert(message)">&times;</span>
+</div>
