@@ -1,3 +1,28 @@
+# Cara menjalankan aplikasi dan environment
+Technical Assessment Backoﬃce - Frontend
+
+## Cara Clone repo Github
+- Buat folder untuk menyimpan clone.
+- Buka CMD arahkan ke folder yang baru di buat / jika memiliki VSCode, dapat klik kanan di dalam folder yang telah di buat, lalu pilih gitbase here atau command prompt > ketikan "code ." di command prompt maka VSCode akan terbuka sesuai dengan posisi folder yang sudah di sesuaikan.
+- Jika sudah ketikan perintah di command prompt "git clone https://github.com/sakabayul/technical-assessment-fe-angular.git" pastikan jika command prompt tertuju ke file yang sudah dibuat, maka secara otomatis file dari Github akan terdownload.
+- Lanjutkan ke Install environment
+
+## Cara Download repo Github
+- Buat folder untuk menyimpan file yang akan di download dari Github.
+- Download file dari web "https://github.com/sakabayul/technical-assessment-fe-angular" > Cari tombol <> Code > Download Zip.
+- Extract zip di dalam folder yang sudah dibuat sebelumnya.
+- Buka CMD arahkan ke folder yang baru saja di extract tadi
+- Lanjutkan ke Install environment
+
+## Install environment
+- npm install
+- Lanjutkan ke Running application
+
+## Running application
+- ng serve
+
+
+
 # TestProject
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.14.
